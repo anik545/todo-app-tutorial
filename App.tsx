@@ -10,19 +10,19 @@ interface Todo {
 
 export const App: React.FC<{}> = () => {
   const [todos, setTodos] = React.useState<Todo[]>([]);
-  const [currentTodo, setCurrentTodo] = React.useState('');
+  const [newTodoTitle, setNewTodoTitle] = React.useState('');
+
+  const addNewTodo = () =>
+    setTodos([...todos, { id: uuid(), title: newTodoTitle }]);
+
   return (
     <div className={css.container}>
       <InputGroup
         type="text"
-        value={currentTodo}
-        onChange={(e) => setCurrentTodo(e.target.value)}
+        value={newTodoTitle}
+        onChange={(e) => setNewTodoTitle(e.target.value)}
       />
-      <Button
-        onClick={() => setTodos([...todos, { id: uuid(), title: currentTodo }])}
-      >
-        Add todo
-      </Button>
+      <Button onClick={addNewTodo}>Add todo</Button>
       {todos.map((x) => (
         <div>{x.title}</div>
       ))}
