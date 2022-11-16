@@ -1,0 +1,8 @@
+@use '@blueprintjs/core/lib/scss/variables.scss' as bp;
+
+.container {
+  border-radius: 2px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid bp.$gray4;
+}
