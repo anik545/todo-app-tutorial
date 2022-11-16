@@ -19,8 +19,8 @@ export const App: React.FC<{}> = () => {
   const addNewTodo = () =>
     setTodos([...todos, { id: uuid(), title: newTodoTitle, done: false }]);
 
-  const onChangeTodoWithId = (id: number) => (partial: Partial<Todo>) =>
-    setTodos(todos.map((x) => (x.id === id ? { ...x, ...partial } : x)));
+  const onToggleDoneForTodoWithId = (id: number) => () =>
+    setTodos(todos.map((x) => (x.id === id ? { ...x, done: !x.done } : x)));
 
   return (
     <div className={css.container}>
@@ -38,7 +38,10 @@ export const App: React.FC<{}> = () => {
           return null;
         }
         return (
-          <SingleTodo onChangeTodo={onChangeTodoWithId(todo.id)} todo={todo} />
+          <SingleTodo
+            onToggleDone={onToggleDoneForTodoWithId(todo.id)}
+            todo={todo}
+          />
         );
       })}
     </div>
@@ -47,16 +50,13 @@ export const App: React.FC<{}> = () => {
 
 export interface SingleTodoProps {
   todo: Todo;
-  onChangeTodo(x: Partial<Todo>): void;
+  onToggleDone(): void;
 }
 
-const SingleTodo: React.FC<SingleTodoProps> = ({ todo, onChangeTodo }) => {
+const SingleTodo: React.FC<SingleTodoProps> = ({ todo, onToggleDone }) => {
   return (
     <div className={css.todo}>
-      <Checkbox
-        checked={todo.done}
-        onChange={() => onChangeTodo({ done: !todo.done })}
-      />
+      <Checkbox checked={todo.done} onChange={() => onToggleDone()} />
       {todo.title}
     </div>
   );
