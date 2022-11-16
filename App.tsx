@@ -1,4 +1,4 @@
-import { Button, InputGroup } from '@blueprintjs/core';
+import { Button, Checkbox, InputGroup } from '@blueprintjs/core';
 import * as React from 'react';
 import css from './style.module.scss';
 import { v4 as uuid } from 'uuid';
@@ -6,11 +6,14 @@ import { v4 as uuid } from 'uuid';
 interface Todo {
   id: number;
   title: string;
+  done: boolean;
 }
 
 export const App: React.FC<{}> = () => {
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const [currentTodo, setCurrentTodo] = React.useState('');
+  const onChangeTodoWithId = (id: number) => (partial: Partial<Todo>) =>
+    setTodos(todos.map((x) => (x.id === id ? { ...x, ...partial } : x)));
   return (
     <div className={css.container}>
       <InputGroup
@@ -19,13 +22,27 @@ export const App: React.FC<{}> = () => {
         onChange={(e) => setCurrentTodo(e.target.value)}
       />
       <Button
-        onClick={() => setTodos([...todos, { id: uuid(), title: currentTodo }])}
+        onClick={() => setTodos([...todos, { id: uuid(), title: currentTodo, done: false }])}
       >
         Add todo
       </Button>
       {todos.map((x) => (
-        <div>{x.title}</div>
+        <SingleTodo onChangeTodo={onChangeTodoWithId(x.id)}/>
       ))}
     </div>
   );
 };
+
+export interface SingleTodoProps {
+  todo: Todo
+  onChangeTodo(x: Partial<Todo>): void
+}
+
+export const SingleTodo: React.FC<SingleTodoProps> = ({todo, onChangeTodo}) => {
+    return (
+      <div>
+        <Checkbox checked={todo.done} onChange={onChangeTodo({done: !todo.done})}/>
+        {todo.title}       
+      </div>
+    );
+}
