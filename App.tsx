@@ -12,8 +12,10 @@ export const App: React.FC<{}> = () => {
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const [newTodoTitle, setNewTodoTitle] = React.useState('');
 
-  const addNewTodo = () =>
-    setTodos([...todos, { id: uuid(), title: newTodoTitle }]);
+  const addNewTodo = () => {
+    const newTodo = { id: uuid(), title: newTodoTitle };
+    setTodos([...todos, newTodo]);
+  };
 
   return (
     <div className={css.container}>
