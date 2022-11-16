@@ -6,3 +6,8 @@
   padding: 10px;
   border: 1px solid bp.$gray4;
 }
+
+.todo {
+  display: flex;
+  flex-direction: row;
+}
