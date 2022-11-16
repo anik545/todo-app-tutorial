@@ -22,7 +22,7 @@ export const App: React.FC<{}> = () => {
         value={newTodoTitle}
         onChange={(e) => setNewTodoTitle(e.target.value)}
       />
-      <Button onClick={addNewTodo}>Add todo</Button>
+      <Button onClick={addNewTodo} text="Add todo" icon="add" />
       {todos.map((x) => (
         <div>{x.title}</div>
       ))}
