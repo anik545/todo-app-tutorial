@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 interface Todo {
   id: number;
   title: string;
+  done: boolean;
 }
 
 export const App: React.FC<{}> = () => {
@@ -13,14 +14,11 @@ export const App: React.FC<{}> = () => {
   const [newTodoTitle, setNewTodoTitle] = React.useState('');
   const [showDoneTodos, setShowDoneTodos] = React.useState(false);
 
-<<<<<<< HEAD
   const toggleShowDoneTodos = () => setShowDoneTodos((x) => !x);
 
   const addNewTodo = () =>
-    setTodos([...todos, { id: uuid(), title: newTodoTitle }]);
+    setTodos([...todos, { id: uuid(), title: newTodoTitle, done: false }]);
 
-=======
->>>>>>> b624fe5 (1 file modified)
   const onChangeTodoWithId = (id: number) => (partial: Partial<Todo>) =>
     setTodos(todos.map((x) => (x.id === id ? { ...x, ...partial } : x)));
 
