@@ -13,11 +13,14 @@ export const App: React.FC<{}> = () => {
   const [newTodoTitle, setNewTodoTitle] = React.useState('');
   const [showDoneTodos, setShowDoneTodos] = React.useState(false);
 
+<<<<<<< HEAD
   const toggleShowDoneTodos = () => setShowDoneTodos((x) => !x);
 
   const addNewTodo = () =>
     setTodos([...todos, { id: uuid(), title: newTodoTitle }]);
 
+=======
+>>>>>>> b624fe5 (1 file modified)
   const onChangeTodoWithId = (id: number) => (partial: Partial<Todo>) =>
     setTodos(todos.map((x) => (x.id === id ? { ...x, ...partial } : x)));
 
