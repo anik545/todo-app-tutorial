@@ -1,4 +1,4 @@
-import { Button, InputGroup } from '@blueprintjs/core';
+import { Button, Checkbox, InputGroup } from '@blueprintjs/core';
 import * as React from 'react';
 import css from './style.module.scss';
 import { v4 as uuid } from 'uuid';
@@ -17,7 +17,7 @@ export const App: React.FC<{}> = () => {
   const toggleShowDoneTodos = () => setShowDoneTodos((x) => !x);
 
   const addNewTodo = () =>
-    setTodos([...todos, { id: uuid(), title: newTodoTitle }]);
+    setTodos([...todos, { id: uuid(), title: newTodoTitle, done: false }]);
 
   const onChangeTodoWithId = (id: number) => (partial: Partial<Todo>) =>
     setTodos(todos.map((x) => (x.id === id ? { ...x, ...partial } : x)));
