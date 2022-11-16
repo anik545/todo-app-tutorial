@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 interface Todo {
   id: number;
   title: string;
+  done: boolean;
 }
 
 export const App: React.FC<{}> = () => {
